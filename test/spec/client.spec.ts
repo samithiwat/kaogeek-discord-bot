@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import Bot from '../../src/client'
 
-vi.mock('../../src/config.js', () => {
+vi.mock('../../src/config.js', async () => {
   const Environment = { BOT_TOKEN: 'MOCK_TOKEN' }
 
   return { Environment }
@@ -11,15 +11,16 @@ vi.mock('../../src/config.js', () => {
 describe('Bot', () => {
   let client: Bot
 
-  beforeEach(() => {
+  beforeEach(async () => {
     client = new Bot()
   })
+
   afterEach(() => {
     vi.clearAllMocks()
   })
 
   it('should defined', async () => {
-    client.init = vi.fn()
+    client.initAndStart = vi.fn()
     expect(client).toBeDefined()
   })
 })
